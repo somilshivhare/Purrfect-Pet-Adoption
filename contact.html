@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Contact — Purrfect</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav>
+    <div class="brand"><a href="index.html"><h1>Purr<b class="accent">fect</b></h1></a></div>
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="index.html#pets">Pets</a>
+      <a href="index.html#requirements">Requirements</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#stories">Stories</a>
+    </div>
+    <button id="nav-home-btn" class="btn-2" aria-label="Home" onclick="window.location.href='index.html'">Home</button>
+  </nav>
+
+  <main id="main">
+    <section class="contact-page">
+      <div class="contact-inner">
+        <div class="contact-grid">
+          <div class="contact-form-col">
+            <h1>Contact Us</h1>
+            <p>Have a question or need help with adoption? Send us a message and we’ll reply within 48 hours.</p>
+            <form id="contact-form">
+              <label for="cname">Full name</label>
+              <input id="cname" name="name" type="text" required />
+
+              <label for="cemail">Email</label>
+              <input id="cemail" name="email" type="email" required />
+
+              <label for="cmessage">Message</label>
+              <textarea id="cmessage" name="message" rows="6" required></textarea>
+
+              <div style="display:flex;gap:12px;align-items:center;margin-top:8px;">
+                <button class="btn-3" type="submit">Send Message</button>
+                <button class="btn-transparent" type="button" id="contact-clear">Clear</button>
+              </div>
+            </form>
+          </div>
+          <aside class="contact-aside">
+            <img src="img/hero-img-2.png" alt="Happy adopter" class="contact-illustration" loading="lazy" />
+            <div class="contact-cards">
+              <div class="contact-card"><strong>Email</strong><div>purrfect@gmail.com</div></div>
+              <div class="contact-card"><strong>Phone</strong><div>+204-512-5912</div></div>
+              <div class="contact-card"><strong>Address</strong><div>123 Pet Lane, Happy Town</div></div>
+            </div>
+            <div class="contact-note">Image credit: Pexels — used with permission</div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>Purrfect</h4>
+        <p>Find Your Purrfect Pet Soul Today!</p>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <p>purrfect@gmail.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">All Rights Reserved to Purrfect Org 2024</div>
+  </footer>
+
+  <!-- Bottom nav (same as main site) -->
+  <nav class="bottom-nav" aria-hidden="false">
+    <button id="bn-home" class="bn-btn" aria-label="Home"><i class="fa-solid fa-house"></i></button>
+    <button id="bn-pets" class="bn-btn" aria-label="Pets"><i class="fa-solid fa-paw"></i></button>
+    <button id="bn-contact" class="bn-btn" aria-label="Contact"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    <button id="bn-cart" class="bn-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count-small" id="cart-count-small">0</span></button>
+    <button id="bn-fav" class="bn-btn" aria-label="Favorites"><i class="fa-regular fa-heart"></i></button>
+  </nav>
+
+  <script src="index.js" defer></script>
+</body>
+</html>

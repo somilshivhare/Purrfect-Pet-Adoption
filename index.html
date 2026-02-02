@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Use for responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- link To CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- link To JS -->
+    <script src="index.js" defer></script>
+    <!-- For Scroll Reveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- For Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Link For Gsap -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- Link For Gsap - Scroll Trigger -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- Link For Lenis - Smooth Scrolling -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <!-- Link For Split Type -->
+    <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+
+    <title>Purrfect | Pet Adoption</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Page loader (will hide on load) -->
+    <div id="page-loader" aria-hidden="false">
+      <div class="spinner" role="status" aria-label="Loading"></div>
+    </div>
+
+    <!-- navbar -->
+     <nav>
+        <div class="brand">
+            <a href="index.html"><h1>Purr<b class="accent">fect</b></h1></a>
+        </div>
+        <div class="menu">
+            <div class="btn close-btn-wrapper">
+                <i class="fas fa-times close-btn"></i>
+            </div>
+            <a href="index.html">Home</a>
+            <a href="index.html#pets">Pets</a>
+            <a href="index.html#requirements">Requirements</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#stories">Stories</a>
+        </div>
+        <button class="btn-2" onclick="window.location.href='contact.html'">
+            <p>Contact Us</p>
+            <i class="fa-solid fa-circle-arrow-right"></i>
+        </button>
+        <button class="btn-2 cart-btn" id="cart-btn" aria-label="View cart">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </button>
+        <button class="btn-2" id="fav-btn-nav" aria-label="View favorites">
+            <i class="fa-regular fa-heart"></i>
+        </button>
+        <div class="btn menu-toggle">
+            <i class="fas fa-bars menu-btn"></i>
+        </div>
+     </nav>
+     <!-- Navbar End -->
+  <main id="main">
+      <!-- Hero Page Section -->
+       <section class="heropage">
+        <div class="hero-headlines">
+          <h1>Find your Purrfect Pet Soul Today! </h1>
+        <p>
+          Discover Your Perfect Companion in Our Selection of Loving Pets 
+          Available for Adoption
+        </p>
+      <div class="hero-headlines-button">
+        <button class="btn-3" id="btn-our-pets">Our Pets</button>
+        <button class="btn-3 btn-transparent" id="btn-contact-hero">Contact Us</button>
+      </div>
+      <div class="hero-images">
+        <img src="img/hero-img-1.png" alt="img" />
+        <img src="img/hero-img-2.png" alt="img">
+        <img src="img/hero-img-3.png" alt="img">
+      </div>
+
+      <div class="hero-features">
+        <div class="hero-feature">
+          <i class="fa-solid fa-paw"></i>
+          <h4>Adoption Assistance</h4>
+          <p>One-on-one help to match the right pet for your home.</p>
+        </div>
+        <div class="hero-feature">
+          <i class="fa-solid fa-stethoscope"></i>
+          <h4>Vet Checked</h4>
+          <p>All pets receive a health check and vaccinations before adoption.</p>
+        </div>
+        <div class="hero-feature">
+          <i class="fa-solid fa-house"></i>
+          <h4>Home Support</h4>
+          <p>Guidance for making your home pet-friendly and safe.</p>
+        </div>
+      </div> 
+       </section>
+             <!-- Hero Page Section End -->
+
+             <!-- requirements section -->
+    <section class="requirements" id="requirements">
+    <div class="requirements-headlines">
+      <h1>Our Process For Adoption</h1>
+      <p>Our process is simple and filled with joy every step of the way:</p>
+
+      <div class="r-item-container">
+        <!-- r item 1 -->
+    <div class="r-item">
+      <div class="r-logo" style="background-color: #b9ff46">
+        <i class="fa-regular fa-newspaper"></i>
+      </div>
+      <h5>Submitted an application</h5>
+    </div>
+
+         <!-- r item 2 -->
+    <div class="r-item">
+      <div class="r-logo" style="background-color: #fff846">
+        <i class="fa-solid fa-phone"></i>
+      </div>
+      <h5>Attending an online interview</h5>
+    </div>
+         <!-- r item 3 -->
+    <div class="r-item">
+      <div class="r-logo" style="background-color: #ff8846">
+        <i class="fa-solid fa-paw"></i>
+      </div>
+      <h5>Meeting the Pet in person</h5>
+    </div>
+
+       <!-- r item 4 -->
+    <div class="r-item">
+      <div class="r-logo" style="background-color: #46c7ff">
+        <i class="fa-regular fa-file-zipper"></i>
+      </div>
+      <h5>Signing an adoption agreement</h5>
+    </div>
+  
+       <!-- r item 5 -->
+    <div class="r-item">
+      <div class="r-logo" style="background-color: #4fffca">
+        <i class="fa-solid fa-handshake"></i>
+      </div>
+      <h5>Congratulations on finding a match!</h5>
+    </div>
+
+      </div>
+    </div>
+    <img src="img/requirements-img.png" alt="img">
+    </section>
+                 <!-- requirements section End-->
+
+             <section class="pets" id="pets">
+              <div class="pets-headlines">
+                <i class="fa-solid fa-paw"></i>
+                <h1>Meet Your Soul Pets</h1>
+              </div>
+
+              <div class="pets-filters">
+                <input type="search" id="search" placeholder="Search pets by name or description" aria-label="Search pets" />
+                <select id="filter-type" aria-label="Filter by type">
+                  <option value="all">All</option>
+                  <option value="Dog">Dogs</option>
+                  <option value="Cat">Cats</option>
+                  <option value="Bird">Birds</option>
+                </select>
+                <select id="sort-by" aria-label="Sort pets">
+                  <option value="featured">Featured</option>
+                  <option value="name">Name (A–Z)</option>
+                </select>
+                <button class="btn-transparent" id="toggle-favs">Show Favorites</button>
+              </div>
+
+              <div class="pets-collection">
+                <div id="no-results" style="display:none; text-align:center; width:100%; padding:20px;">No pets match your search or filter.</div>
+              </div>
+                <button id="btn-find-more" class="btn-3 btn-pets" aria-label="Find requirements">
+                  <p>Find more</p>
+                  <i class="fa-solid fa-arrow-right-long"></i>
+                </button>
+             </section>
+               <!-- Pets Section End -->
+
+               <!-- Services Section -->
+               <section class="services" id="services">
+                 <div class="services-headlines">
+                   <h1>Our Services</h1>
+                   <p>Supporting both pets and adopters with care — we provide:</p>
+                 </div>
+                 <div class="services-list">
+                   <div class="service-item">
+                     <i class="fa-solid fa-paw"></i>
+                     <h3>Adoption Assistance</h3>
+                     <p>We help guide you through the application & matching process.</p>
+                   </div>
+                   <div class="service-item">
+                     <i class="fa-solid fa-stethoscope"></i>
+                     <h3>Initial Vet Check</h3>
+                     <p>All pets receive a basic health check before adoption.</p>
+                   </div>
+                   <div class="service-item">
+                     <i class="fa-solid fa-house-chimney"></i>
+                     <h3>Home-Visit Support</h3>
+                     <p>Guidance for setting up a safe home environment for your new pet.</p>
+                   </div>
+                 </div>
+               </section>
+
+               <!-- Stories Section -->
+               <section class="stories" id="stories">
+                 <div class="stories-inner">
+                   <div class="stories-headlines">
+                     <h1>What People Say</h1>
+                     <p>Real stories from our adopters</p>
+                   </div>
+                   <div class="stories-carousel" id="stories-carousel">
+                     <button class="stories-prev" aria-label="Previous">‹</button>
+                     <div class="stories-track">
+                       <div class="story-item">
+                         <img class="story-avatar" src="img/testimony-image-1.png" alt="Emily Johnson" loading="lazy" />
+                         <div class="story-body">
+                           <blockquote>"Purrfect made adopting so simple — our dog changed our lives."</blockquote>
+                           <cite>— Emily Johnson</cite>
+                           <small class="story-avatar-credit">Image: Pexels</small>
+                         </div>
+                       </div>
+                       <div class="story-item">
+                         <img class="story-avatar" src="img/testimony-image-2.png" alt="Daniel Martinez" loading="lazy" />
+                         <div class="story-body">
+                           <blockquote>"Professional and caring team; highly recommend."</blockquote>
+                           <cite>— Daniel Martinez</cite>
+                           <small class="story-avatar-credit">Image: Pexels</small>
+                         </div>
+                       </div>
+                       <div class="story-item">
+                         <img class="story-avatar" src="img/testimony-image-3.png" alt="Sarah Thompson" loading="lazy" />
+                         <div class="story-body">
+                           <blockquote>"We finally found our perfect companion!"</blockquote>
+                           <cite>— Sarah Thompson</cite>
+                           <small class="story-avatar-credit">Image: Pexels</small>
+                         </div>
+                       </div>
+                       <div class="story-item">
+                         <img class="story-avatar" src="img/pet-item-1.png" alt="Happy adopter" loading="lazy" />
+                         <div class="story-body">
+                           <blockquote>"The team matched us with our best friend — couldn't be happier."</blockquote>
+                           <cite>— Mark R.</cite>
+                           <small class="story-avatar-credit">Image: Unsplash</small>
+                         </div>
+                       </div>
+                       <div class="story-item">
+                         <img class="story-avatar" src="img/pet-item-2.png" alt="Adopter" loading="lazy" />
+                         <div class="story-body">
+                           <blockquote>"Excellent support and follow-up after adoption."</blockquote>
+                           <cite>— Jenna K.</cite>
+                           <small class="story-avatar-credit">Image: Unsplash</small>
+                         </div>
+                       </div>
+                       <div class="story-item">
+                         <img class="story-avatar" src="img/pet-item-3.png" alt="Adopter" loading="lazy" />
+                         <div class="story-body">
+                           <blockquote>"Felt confident through the whole process — thank you!"</blockquote>
+                           <cite>— Diego L.</cite>
+                           <small class="story-avatar-credit">Image: Unsplash</small>
+                         </div>
+                       </div> 
+                     </div>
+                     <button class="stories-next" aria-label="Next">›</button>
+                   </div>
+                   <div class="stories-dots" aria-hidden="true"></div>
+                 </div>
+               </section>
+
+               <!-- FAQ Section -->
+               <section class="faq" id="faq">
+                 <h2>Frequently Asked Questions</h2>
+                 <div class="faq-list">
+                   <div class="faq-item">
+                     <button class="faq-q">What is the adoption process?</button>
+                     <div class="faq-a">You submit an application, attend a brief interview, meet the pet, and sign the adoption agreement.</div>
+                   </div>
+                   <div class="faq-item">
+                     <button class="faq-q">Are adoptions free?</button>
+                     <div class="faq-a">Adoption may include a small fee to cover vet checks and admin. Fees are listed per pet.</div>
+                   </div>
+                   <div class="faq-item">
+                     <button class="faq-q">Can I return a pet?</button>
+                     <div class="faq-a">We have a 14-day support window to help with early challenges; contact our team for assistance.</div>
+                   </div>
+                   <div class="faq-item">
+                     <button class="faq-q">What vaccinations do pets have?</button>
+                     <div class="faq-a">All pets are given basic vaccinations and a health check before they are adopted. You will receive medical records at adoption.</div>
+                   </div>
+                   <div class="faq-item">
+                     <button class="faq-q">How long does the adoption take?</button>
+                     <div class="faq-a">Most adoptions take 2-7 days depending on application and home checks. We keep you informed through each step.</div>
+                   </div>
+                   <div class="faq-item">
+                     <button class="faq-q">Can I apply for multiple pets?</button>
+                     <div class="faq-a">Yes, you may apply for more than one pet. Our team will assess each application and compatibility with your home.</div>
+                   </div>
+                 </div>
+               </section>
+
+               <!-- About Section -->
+               <section class="about" id="about">
+                 <div class="about-inner">
+                   <div class="about-headlines">
+                     <h1>About Us</h1>
+                     <p>
+                       <strong>Purrfect</strong> is not just a <b>pet adoption website</b>; it's a
+                       haven for both pets in search of their forever homes and compassionate
+                       individuals ready to welcome them with open arms.
+                     </p>
+                     <div class="about-info">
+                       <div class="about-info-item">
+                         <h5>100+</h5>
+                         <h6>Saved Pets</h6>
+                       </div>
+                       <div class="about-info-divider" aria-hidden="true"></div>
+                       <div class="about-info-item">
+                         <h5>100+</h5>
+                         <h6>Adoption Rate</h6>
+                       </div>
+                       <div class="about-info-divider" aria-hidden="true"></div>
+                       <div class="about-info-item">
+                         <h5>5 Star</h5>
+                         <h6>Community Loved</h6>
+                       </div>
+                     </div>
+                   </div>
+                   <div class="about-cta">
+                     <button class="btn-3">Get Started</button>
+                   </div>
+                 </div>
+               </section>
+
+               <!-- Footer -->
+               <footer class="site-footer">
+                 <div class="footer-inner">
+                   <div class="footer-col">
+                     <h4>Purrfect</h4>
+                     <p>Find Your Purrfect Pet Soul Today!</p>
+                   </div>
+                   <div class="footer-col">
+                     <h5>Quick Links</h5>
+                     <ul>
+                       <li><a href="index.html">Home</a></li>
+                       <li><a href="#pets">Pets</a></li>
+                       <li><a href="#requirements">Requirements</a></li>
+                       <li><a href="#services">Services</a></li>
+                     </ul>
+                   </div>
+                   <div class="footer-col">
+                     <h5>Contact</h5>
+                     <p>purrfect@gmail.com</p>
+                     <p>+204-512-5912</p>
+                   </div>
+                 </div>
+                 <div class="footer-bottom">All Rights Reserved to Purrfect Org 2024</div>
+               </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" aria-live="polite" aria-atomic="true" style="display:none"></div>
+
+  <!-- Orders Modal -->
+  <div class="orders-modal" id="orders-modal" aria-hidden="true">
+    <div class="orders-content" role="dialog" aria-modal="true">
+      <button class="close-orders" id="close-orders" aria-label="Close orders"><i class="fa-solid fa-xmark"></i></button>
+      <h2>Your Past Adoptions</h2>
+      <div class="orders-list" id="orders-list"></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:12px;gap:8px;">
+        <button class="btn-transparent" id="export-orders">Export Adoptions</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Favorites Modal -->
+  <div class="favorites-modal" id="favorites-modal" aria-hidden="true">
+    <div class="favorites-content" role="dialog" aria-modal="true">
+      <button class="close-favorites" id="close-favorites" aria-label="Close favorites"><i class="fa-solid fa-xmark"></i></button>
+      <h2>Your Favorites</h2>
+      <div class="favorites-list" id="favorites-list"></div>
+    </div>
+  </div>
+
+  <!-- Pet Detail Modal -->
+  <div class="pet-detail-modal" id="pet-detail-modal" aria-hidden="true">
+    <div class="pet-detail-content" role="dialog" aria-modal="true">
+      <button class="close-pet-detail" id="close-pet-detail" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      <div class="pet-detail-inner">
+        <img src="img/pet-item-1.png" id="pet-detail-img" alt="pet image" />
+        <div class="pet-detail-meta">
+          <h2 id="pet-detail-name">Pet Name</h2>
+          <p id="pet-detail-type">Type • Age</p>
+          <p id="pet-detail-desc">Long description of the pet, temperament and needs.</p>
+          <div class="pet-detail-actions">
+            <button class="btn-3" id="pet-adopt-btn">Add to Cart</button>
+            <button class="btn-transparent" id="pet-fav-btn">Add to Favorites</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal" id="cart-modal" aria-hidden="true">
+    <div class="cart-content" role="dialog" aria-modal="true">
+      <button class="close-cart" id="close-cart" aria-label="Close cart"><i class="fa-solid fa-xmark"></i></button>
+      <h2>Your Adoption Cart</h2>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-actions">
+        <button class="btn-3" id="checkout-btn">Proceed to Adopt</button>
+        <button class="btn-transparent" id="view-orders">View Adoptions</button>
+        <button class="btn-transparent" id="clear-cart">Clear Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div class="checkout-modal" id="checkout-modal" aria-hidden="true">
+    <div class="checkout-content" role="dialog" aria-modal="true">
+      <button class="close-checkout" id="close-checkout" aria-label="Close checkout"><i class="fa-solid fa-xmark"></i></button>
+      <h2>Adoption Details</h2>
+      <form id="checkout-form">
+        <label for="name">Full name</label>
+        <input id="name" name="name" type="text" required />
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" required />
+        <label for="message">Message (optional)</label>
+        <input id="message" name="message" type="text" />
+        <button class="btn-3" type="submit">Confirm Adoption</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mobile bottom navigation -->
+  <nav class="bottom-nav" aria-hidden="false">
+    <button id="bn-home" class="bn-btn" aria-label="Home"><i class="fa-solid fa-house"></i></button>
+    <button id="bn-pets" class="bn-btn" aria-label="Pets"><i class="fa-solid fa-paw"></i></button>
+    <button id="bn-contact" class="bn-btn" aria-label="Contact"><i class="fa-solid fa-circle-arrow-right"></i></button>
+    <button id="bn-cart" class="bn-btn" aria-label="Cart"><i class="fa-solid fa-cart-shopping"></i><span class="cart-count-small" id="cart-count-small">0</span></button>
+    <button id="bn-fav" class="bn-btn" aria-label="Favorites"><i class="fa-regular fa-heart"></i></button>
+  </nav>
+
+  </body>
+</html>
