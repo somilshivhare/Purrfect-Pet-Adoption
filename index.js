@@ -509,6 +509,14 @@ if (closeOrdersBtn) closeOrdersBtn.addEventListener('click', () => { if (lastFoc
   [prev,next,track].forEach(el => el.addEventListener('mouseleave', ()=> timer = setInterval(()=> show(idx+1), 5000)));
 })();
 
+// Read all stories button (scroll into view and focus carousel)
+const btnReadStories = document.getElementById('btn-read-stories');
+if (btnReadStories) btnReadStories.addEventListener('click', () => { const stories = document.getElementById('stories'); if (stories) { stories.scrollIntoView({ behavior: 'smooth', block: 'start' }); const firstDot = document.querySelector('.stories-dots button'); if (firstDot) firstDot.focus(); } });
+
+// Support CTA handler (redirect to contact page)
+const btnSupport = document.getElementById('btn-support');
+if (btnSupport) btnSupport.addEventListener('click', () => { window.location.href = 'contact.html'; });
+
 // Scroll-triggered reveals (GSAP ScrollTrigger)
 if (window.gsap && gsap.registerPlugin) {
   try {
