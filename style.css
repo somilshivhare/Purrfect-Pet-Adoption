@@ -261,8 +261,11 @@ color: var(--accent);
 }
 .hero-images {
     display: flex;
-margin-top: 56px;
-gap: 35px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 56px;
+    gap: 35px;
+    width: 100%;
 }
 
 /* Requirements section { */
