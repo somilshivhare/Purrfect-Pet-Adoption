@@ -1,3 +1,6 @@
+// Disable Lenis Smooth Scrolling - Use Normal Browser Scroll
+let lenis = null; // Disabled for normal scroll speed
+
 // NAVBAR & MENU
 const navbar = document.querySelector("nav");
 if (navbar) {
@@ -18,10 +21,21 @@ const toggleMenu = () => {
 if (menuBtn) menuBtn.addEventListener("click", toggleMenu);
 if (closeBtn) closeBtn.addEventListener("click", toggleMenu);
 
-// Close menu when a link is clicked
+// Close menu when a link is clicked and smooth scroll to anchor
 document.querySelectorAll(".menu a").forEach((link) => {
-  link.addEventListener("click", () => {
+  link.addEventListener("click", (e) => {
     if (menu && menu.classList.contains("active")) menu.classList.remove("active");
+    
+    // Handle smooth scrolling for anchor links
+    const href = link.getAttribute("href");
+    if (href && href.startsWith("#")) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   });
 });
 
@@ -48,33 +62,18 @@ document.addEventListener("click", (e) => {
 
 /* ------------------ PETS & CART: simple data-driven UI ------------------ */
 const pets = [
-  { id: 'p1', name: 'Sir Woofs', type: 'Dog', age: '2 years', img: 'img/pet-item-1.png', desc: 'Gentle and playful companion.' },
-  { id: 'p2', name: 'Captain Squawks', type: 'Bird', age: '1 year', img: 'img/pet-item-2.png', desc: 'A chirpy friend who loves to sing.' },
-  { id: 'p3', name: 'Professor Meow', type: 'Cat', age: '3 years', img: 'img/pet-item-3.png', desc: 'Calm and curious lap cat.' }
+  { id: 'p1', name: 'Sir Woofs', type: 'Dog', age: '2 years', img: 'img/pet-item-1.png', desc: 'Gentle and playful companion.', longDesc: 'Sir Woofs is a friendly and energetic dog who loves to play fetch and go on long walks. Perfect for active families.' },
+  { id: 'p2', name: 'Captain Squawks', type: 'Bird', age: '1 year', img: 'img/pet-item-2.png', desc: 'A chirpy friend who loves to sing.', longDesc: 'Captain Squawks is a vibrant and talkative bird who enjoys music and interaction. Great for bird enthusiasts.' },
+  { id: 'p3', name: 'Professor Meow', type: 'Cat', age: '3 years', img: 'img/pet-item-3.png', desc: 'Calm and curious lap cat.', longDesc: 'Professor Meow is a gentle and intelligent cat who loves cuddles and quiet time. Perfect for a calm home environment.' },
+  { id: 'p4', name: 'Luna', type: 'Dog', age: '4 years', img: 'img/pet-item-1.png', desc: 'Loyal and protective companion.', longDesc: 'Luna is a devoted and protective dog who forms strong bonds with her family. Great for experienced dog owners.' },
+  { id: 'p5', name: 'Whiskers', type: 'Cat', age: '2 years', img: 'img/pet-item-3.png', desc: 'Playful and affectionate feline.', longDesc: 'Whiskers is an active and loving cat who enjoys interactive toys and lots of attention. Perfect for families with children.' },
+  { id: 'p6', name: 'Charlie', type: 'Dog', age: '1 year', img: 'img/pet-item-1.png', desc: 'Energetic puppy ready for adventure.', longDesc: 'Charlie is a young and energetic puppy who loves to explore and play. Ideal for active individuals or families.' },
+  { id: 'p7', name: 'Mittens', type: 'Cat', age: '5 years', img: 'img/pet-item-3.png', desc: 'Mature and wise companion.', longDesc: 'Mittens is a calm and experienced cat who enjoys a peaceful environment. Perfect for seniors or quiet homes.' },
+  { id: 'p8', name: 'Buddy', type: 'Dog', age: '3 years', img: 'img/pet-item-1.png', desc: 'Friendly and well-trained friend.', longDesc: 'Buddy is a well-behaved and sociable dog who gets along with everyone. Great for first-time dog owners.' },
+  { id: 'p9', name: 'Sunny', type: 'Bird', age: '2 years', img: 'img/pet-item-2.png', desc: 'Bright and cheerful feathered friend.', longDesc: 'Sunny is a colorful and cheerful bird who brings joy to any home. Perfect for bird lovers.' }
 ];
 
 const petsContainer = document.querySelector('.pets-collection');
-
-function renderPets() {
-  if (!petsContainer) return;
-  petsContainer.innerHTML = pets.map(p => `
-    <div class="pet-card">
-      <img src="${p.img}" alt="${p.name}" />
-      <h3>${p.name}</h3>
-      <div class="pet-type">${p.type} • ${p.age}</div>
-      <p class="pet-desc">${p.desc}</p>
-      <div class="pet-actions">
-        <button class="btn-3 adopt-btn" data-id="${p.id}">Adopt</button>
-        <button class="btn-transparent fav-btn" data-id="${p.id}" aria-label="Favorite"><i class="fa-regular fa-heart"></i></button>
-      </div>
-    </div>
-  `).join('');
-  // attach handlers
-  document.querySelectorAll('.adopt-btn').forEach(btn => btn.addEventListener('click', () => addToCart(btn.dataset.id)));
-  document.querySelectorAll('.fav-btn').forEach(b => b.addEventListener('click', (e) => {
-    e.currentTarget.classList.toggle('favored');
-  }));
-}
 
 // CART
 let cart = [];
@@ -191,9 +190,9 @@ function renderPets() {
   if (noResults) noResults.style.display = 'none';
 
   petsContainer.innerHTML = list.map(p => `
-    <div class="pet-card" data-id="${p.id}">
+    <div class="pet-card" data-id="${p.id}" style="opacity: 1; visibility: visible;">
       <div class="pet-badge">${p.type}</div>
-      <div class="pet-avatar"><img src="${p.img}" alt="${p.name}" loading="lazy" /></div>
+      <div class="pet-avatar"><img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='img/pet-item-1.png'" /></div>
       <div class="pet-info">
         <h3>${p.name}</h3>
         <div class="pet-type">${p.age}</div>
@@ -229,15 +228,19 @@ if (filterType) filterType.addEventListener('change', renderPets);
 if (sortBy) sortBy.addEventListener('change', renderPets);
 if (toggleFavsBtn) toggleFavsBtn.addEventListener('click', () => { showFavorites = !showFavorites; toggleFavsBtn.textContent = showFavorites ? 'Show All' : 'Show Favorites'; renderPets(); });
 
-// Toast helper
+// Toast helper - Enhanced
 const toastEl = document.getElementById('toast');
 let toastTimer = null;
 function showToast(msg, time=2200) {
   if (!toastEl) return;
   toastEl.textContent = msg;
   toastEl.style.display = 'block';
+  // Force reflow to trigger animation
+  toastEl.offsetHeight;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { toastEl.style.display = 'none'; }, time);
+  toastTimer = setTimeout(() => { 
+    toastEl.style.display = 'none'; 
+  }, time);
 }
 
 // Add animation + better addToCart feedback
@@ -402,11 +405,29 @@ function flyToCart(id) {
   gsap.to(clone, { duration: 0.9, x: (cartBadge.getBoundingClientRect().left - rect.left), y: (cartBadge.getBoundingClientRect().top - rect.top), scale: 0.3, opacity: 0.6, ease: 'power2.inOut', onComplete: () => clone.remove() });
 }
 
-// re-render after features attached
-renderPets();
-loadCart();
-renderOrders();
-renderFavorites();
+// Initialize on DOM ready
+function initApp() {
+  // Ensure pets container exists before rendering
+  if (petsContainer) {
+    renderPets();
+  } else {
+    // Retry if container not found yet
+    setTimeout(() => {
+      if (petsContainer) renderPets();
+    }, 100);
+  }
+  loadCart();
+  renderOrders();
+  renderFavorites();
+}
+
+// Call init when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  // DOM already ready
+  initApp();
+}
 
 // Ensure no modal is accidentally visible on load (safety net)
 (function initLoadAndReveal() {
@@ -442,7 +463,7 @@ renderFavorites();
   setTimeout(hidePageLoader, 6000);
 
   // IntersectionObserver fallback for reveals (works even if GSAP/ScrollTrigger isn't loaded)
-  const revealSelector = '.hero-headlines, .hero-images, .pets-headlines, .service-item, .story-item, .faq-item, .pet-card, .site-footer';
+  const revealSelector = '.hero-headlines, .hero-images, .pets-headlines, .service-item, .story-item, .faq-item, .pet-card, .site-footer, .requirements-headlines, .about-headlines, .hero-features';
   const revealEls = Array.from(document.querySelectorAll(revealSelector));
   // add base 'reveal' class so CSS handles transitions
   revealEls.forEach(el => el.classList.add('reveal'));
@@ -454,9 +475,11 @@ renderFavorites();
           entry.target.classList.add('show');
           // footer gets a special class 'visible' for nicer transform
           if (entry.target.classList.contains('site-footer')) entry.target.classList.add('visible');
+          // Stop observing once revealed for performance
+          obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     revealEls.forEach(el => obs.observe(el));
     // Safety fallback: if some elements never intersect (e.g. due to overflow), reveal after 1200ms
     setTimeout(() => {
@@ -472,46 +495,99 @@ renderFavorites();
 const _addToCart = addToCart;
 addToCart = function(id) { flyToCart(id); _addToCart(id); };
 
-// lazy-loading images (for existing images also mark loading)
-document.querySelectorAll('img').forEach(img => { if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy'); });
+// lazy-loading images with smooth fade-in
+document.querySelectorAll('img').forEach(img => { 
+  if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy'); 
+  
+  // Add smooth fade-in when image loads
+  if (img.complete) {
+    img.classList.add('loaded');
+  } else {
+    img.addEventListener('load', function() {
+      this.classList.add('loaded');
+    }, { once: true });
+  }
+});
 
 // Return focus when closing cart/checkout/orders
 if (closeCartBtn) closeCartBtn.addEventListener('click', () => { if (lastFocusedEl) lastFocusedEl.focus(); });
 if (closeCheckoutBtn) closeCheckoutBtn.addEventListener('click', () => { if (lastFocusedEl) lastFocusedEl.focus(); });
 if (closeOrdersBtn) closeOrdersBtn.addEventListener('click', () => { if (lastFocusedEl) lastFocusedEl.focus(); });
-// Stories carousel
+// Stories carousel - Fast and responsive
 (function initStories() {
   const track = document.querySelector('.stories-track');
   const prev = document.querySelector('.stories-prev');
   const next = document.querySelector('.stories-next');
   const dots = document.querySelector('.stories-dots');
+  const thumbs = document.querySelectorAll('.stories-summary .thumbs img');
   if (!track || !prev || !next || !dots) return;
   const slides = Array.from(track.children);
   let idx = 0;
+  let isTransitioning = false;
+  
   function show(i) {
+    if (isTransitioning) return; // Prevent rapid clicking
+    isTransitioning = true;
+    
     idx = (i + slides.length) % slides.length;
     track.style.transform = `translateX(-${idx * 100}%)`;
-    dots.innerHTML = slides.map((_,j)=>`<button class="dot ${j===idx? 'active':''}" data-i="${j}"></button>`).join('');
+    dots.innerHTML = slides.map((_,j)=>`<button class="dot ${j===idx? 'active':''}" data-i="${j}" aria-label="Go to testimonial ${j+1}"></button>`).join('');
+
+    // Update thumbs active state
+    thumbs.forEach((thumb, j) => {
+      thumb.style.opacity = j === idx ? '1' : '0.5';
+      thumb.style.transform = j === idx ? 'scale(1.1)' : 'scale(1)';
+      thumb.style.border = j === idx ? '2px solid var(--accent)' : '2px solid #fff';
+    });
 
     slides.forEach((s, j) => s.classList.toggle('active-slide', j===idx));
     // animated reveal for the active slide's body
     const body = slides[idx].querySelector('.story-body');
     if (window.gsap && body) {
-      gsap.fromTo(body, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out' });
+      gsap.fromTo(body, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' });
     }
+    
+    setTimeout(() => { isTransitioning = false; }, 300);
   }
-  prev.addEventListener('click', ()=>show(idx-1));
-  next.addEventListener('click', ()=>show(idx+1));
-  dots.addEventListener('click', (e)=> { const b = e.target.closest('button'); if (b && b.dataset.i) show(Number(b.dataset.i)); });
+  
+  prev.addEventListener('click', ()=> {
+    if (!isTransitioning) show(idx-1);
+  });
+  next.addEventListener('click', ()=> {
+    if (!isTransitioning) show(idx+1);
+  });
+  dots.addEventListener('click', (e)=> { 
+    const b = e.target.closest('button'); 
+    if (b && b.dataset.i && !isTransitioning) {
+      show(Number(b.dataset.i));
+    }
+  });
+  
+  // Initialize to show first slide (index 0)
+  track.style.transform = 'translateX(0%)';
   show(0);
-  let timer = setInterval(()=> show(idx+1), 5000);
-  [prev,next,track].forEach(el => el.addEventListener('mouseenter', ()=> clearInterval(timer)));
-  [prev,next,track].forEach(el => el.addEventListener('mouseleave', ()=> timer = setInterval(()=> show(idx+1), 5000)));
+  let timer = setInterval(()=> {
+    if (!isTransitioning) show(idx+1);
+  }, 5000);
+  
+  [prev,next,track].forEach(el => {
+    el.addEventListener('mouseenter', ()=> clearInterval(timer));
+    el.addEventListener('mouseleave', ()=> timer = setInterval(()=> {
+      if (!isTransitioning) show(idx+1);
+    }, 5000));
+  });
 })();
 
 // Read all stories button (scroll into view and focus carousel)
 const btnReadStories = document.getElementById('btn-read-stories');
-if (btnReadStories) btnReadStories.addEventListener('click', () => { const stories = document.getElementById('stories'); if (stories) { stories.scrollIntoView({ behavior: 'smooth', block: 'start' }); const firstDot = document.querySelector('.stories-dots button'); if (firstDot) firstDot.focus(); } });
+if (btnReadStories) btnReadStories.addEventListener('click', () => { 
+  const stories = document.getElementById('stories'); 
+  if (stories) { 
+    stories.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const firstDot = document.querySelector('.stories-dots button'); 
+    if (firstDot) firstDot.focus(); 
+  } 
+});
 
 // Support CTA handler (redirect to contact page)
 const btnSupport = document.getElementById('btn-support');
@@ -568,7 +644,9 @@ if (contactForm) {
 const btnOurPets = document.getElementById('btn-our-pets');
 if (btnOurPets) btnOurPets.addEventListener('click', () => {
   const petsSection = document.getElementById('pets');
-  if (petsSection) petsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (petsSection) {
+    petsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 });
 
 // 'Find more' -> scroll to Requirements
@@ -591,6 +669,15 @@ if (reqAnchor) reqAnchor.setAttribute('tabindex', '-1');
 const btnContactHero = document.getElementById('btn-contact-hero');
 if (btnContactHero) btnContactHero.addEventListener('click', () => { window.location.href = 'contact.html'; });
 
+// Get Started button (About section)
+const btnGetStarted = document.getElementById('btn-get-started');
+if (btnGetStarted) btnGetStarted.addEventListener('click', () => {
+  const petsSection = document.getElementById('pets');
+  if (petsSection) {
+    petsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
+
 // Add GSAP reveal for hero feature cards
 if (window.gsap) {
   try {
@@ -598,14 +685,33 @@ if (window.gsap) {
   } catch (e) { /* ignore if gsap not ready */ }
 }
 
+// Smooth scroll for all anchor links in footer
+document.querySelectorAll('.footer-col a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href').substring(1);
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
 // Bottom nav actions (mobile)
 const bnHome = document.getElementById('bn-home');
 const bnPets = document.getElementById('bn-pets');
 const bnContact = document.getElementById('bn-contact');
 const bnCartBtm = document.getElementById('bn-cart');
 const bnFavBtm = document.getElementById('bn-fav');
-if (bnHome) bnHome.addEventListener('click', () => { const main = document.getElementById('main'); if (main) main.scrollIntoView({ behavior: 'smooth' }); });
-if (bnPets) bnPets.addEventListener('click', () => { const p = document.getElementById('pets'); if (p) p.scrollIntoView({ behavior: 'smooth' }); });
+if (bnHome) bnHome.addEventListener('click', () => { 
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+if (bnPets) bnPets.addEventListener('click', () => { 
+  const p = document.getElementById('pets'); 
+  if (p) {
+    p.scrollIntoView({ behavior: 'smooth' });
+  }
+});
 if (bnContact) bnContact.addEventListener('click', () => { window.location.href = 'contact.html'; });
 if (bnCartBtm && cartBtn) bnCartBtm.addEventListener('click', () => cartBtn.click());
 if (bnFavBtm && favNavBtn) bnFavBtm.addEventListener('click', () => favNavBtn.click());
